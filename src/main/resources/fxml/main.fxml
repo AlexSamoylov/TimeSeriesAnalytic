@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="709.0" prefWidth="1009.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.dnu.samoylov.controller.main.SmoothXmlController">
+   <children>
+       <Button mnemonicParsing="false" onAction="#loadData" prefHeight="60.0" prefWidth="60.0" text="Завантажити" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+      <LineChart fx:id="empFunctionChart" layoutX="70.0" layoutY="82.0" prefHeight="308.0" prefWidth="399.0">
+        <xAxis>
+          <NumberAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+
+       <TableView fx:id="charTable" layoutX="70.0" layoutY="405.0" prefHeight="256.0" prefWidth="399.0">
+           <columns>
+               <TableColumn fx:id="charNameColumn" prefWidth="78.0" text="Критерий" />
+               <TableColumn fx:id="charStatisticColumn" prefWidth="73.0" text="Статистика" />
+               <TableColumn fx:id="charQuantilColumn" prefWidth="137.0" text="Квантиль" />
+               <TableColumn fx:id="charResultColumn" prefWidth="108.0" text="Висновок" />
+           </columns>
+       </TableView>
+
+       <TableView fx:id="charSmoothingTable" layoutX="494.0" layoutY="405.0" prefHeight="256.0" prefWidth="501.0">
+           <columns>
+               <TableColumn fx:id="smOrigValueColumn" prefWidth="78.0" text="Значення часового ряду" />
+               <TableColumn fx:id="smSmoothValue1Column" prefWidth="73.0" text="Згладжені 1" />
+               <TableColumn fx:id="smDeviation1Column" prefWidth="137.0" text="Відхилення 1" />
+               <TableColumn fx:id="smSmoothValue2Column" prefWidth="73.0" text="Згладжені 2" />
+               <TableColumn fx:id="smDeviation2Column" prefWidth="137.0" text="Відхилення 2" />
+           </columns>
+       </TableView>
+
+       <BarChart fx:id="classesChart" layoutX="505.0" layoutY="108.0" prefHeight="256.0" prefWidth="369.0">
+           <xAxis>
+               <CategoryAxis side="BOTTOM" />
+           </xAxis>
+           <yAxis>
+               <NumberAxis side="LEFT" />
+           </yAxis>
+       </BarChart>
+   </children>
+</AnchorPane>

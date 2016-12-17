@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="709.0" prefWidth="1009.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.dnu.samoylov.controller.main.SeasonalityController">
+   <children>
+       <Button mnemonicParsing="false" onAction="#loadData" prefHeight="60.0" prefWidth="123.0" text="GO!" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+      <LineChart fx:id="empFunctionChart" layoutX="430.0" layoutY="70.0" prefHeight="308.0" prefWidth="399.0">
+        <xAxis>
+          <NumberAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+
+       <TableView fx:id="charTable" layoutX="250.0" layoutY="409.0" prefHeight="256.0" prefWidth="738.0">
+           <columns>
+               <TableColumn fx:id="charNameColumn" prefWidth="80.0" text="Критерий" />
+               <TableColumn fx:id="charStatisticColumn" prefWidth="150.0" text="Статистика" />
+               <TableColumn fx:id="charQuantilColumn" prefWidth="150.0" text="Квантиль" />
+               <TableColumn fx:id="charResultColumn" prefWidth="200.0" text="Висновок" />
+           </columns>
+       </TableView>
+      <ListView fx:id="compareView" layoutX="843.0" layoutY="8.0" prefHeight="379.0" prefWidth="166.0" />
+      <TextField fx:id="periodTF" layoutX="197.0" layoutY="28.0" prefHeight="25.0" prefWidth="84.0" promptText="7" text="7" />
+      <TextField fx:id="kTF" layoutX="324.0" layoutY="28.0" prefHeight="25.0" prefWidth="84.0" promptText="4" text="4" />
+      <TextField fx:id="rTF" layoutX="443.0" layoutY="28.0" prefHeight="25.0" prefWidth="84.0" promptText="2" text="2" />
+      <Label layoutX="156.0" layoutY="32.0" text="period" />
+      <Label layoutX="309.0" layoutY="32.0" text="k" />
+      <Label layoutX="427.0" layoutY="32.0" text="r" />
+      <ListView fx:id="seasonWaveLv" layoutX="14.0" layoutY="85.0" prefHeight="136.0" prefWidth="175.0" />
+      <ListView fx:id="forecastLv" layoutX="201.0" layoutY="82.0" prefHeight="136.0" prefWidth="227.0" />
+      <ListView fx:id="fourerLv" layoutX="15.0" layoutY="227.0" prefHeight="136.0" prefWidth="417.0" />
+      <ListView fx:id="balanceLv" layoutX="15.0" layoutY="409.0" prefHeight="256.0" prefWidth="198.0" />
+   </children>
+</AnchorPane>
