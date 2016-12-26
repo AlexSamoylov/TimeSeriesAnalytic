@@ -15,12 +15,7 @@ public class CorrelogramMethod {
         List<Double> rKList = new ArrayList<>();
 
         for (int k = 0; k < Ndiv2; k++) {
-            double rK;
-            if (Ndiv2 < 25) {
-                rK = calcRkLittle(dataSet, k);
-            } else {
-                rK = calcRkNormal(dataSet, k);
-            }
+            double rK = calcRkNormal(dataSet, k);
 
             rKList.add(rK);
         }

@@ -1,16 +1,23 @@
 package org.dnu.samoylov.controller.main;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.dnu.samoylov.controller.sub.linear.Linear;
 import org.dnu.samoylov.controller.sub.seasonality.Seasonality;
+import org.dnu.samoylov.service.estimate.QuantilCalculator;
 import org.dnu.samoylov.util.SpringFXMLLoader;
+import org.dnu.samoylov.util.ZoomedLineChart;
 import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
@@ -30,14 +37,14 @@ public class SeasonalityController extends MainMainController implements Initial
 
     public ListView<String> compareView;
     public ListView balanceLv;
-
+    public ZoomedLineChart balanceChart;
 
 
     private Linear linear;
     private List<Double> dataSet;
     private List<Double> withoutTrendDataSet;
 
-    public static void showSeasonality(Linear linear, List<Double> dataSet, List<Double> withoutTrendDataSet) {
+    public static void showSeasonality(ActionEvent event, Linear linear, List<Double> dataSet, List<Double> withoutTrendDataSet) {
 
         final Group root = new Group();
         final Stage stage = new Stage();
@@ -47,6 +54,10 @@ public class SeasonalityController extends MainMainController implements Initial
         final Scene scene = new Scene(root);
 
         stage.setScene(scene);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(
+                ((Node) event.getSource()).getScene().getWindow());
+
         stage.show();
 
         if (dataSet != null) {
@@ -60,6 +71,7 @@ public class SeasonalityController extends MainMainController implements Initial
         this.withoutTrendDataSet = withoutTrendDataSet;
     }
 
+    List<Double> selectionSeasonalityWithTrendLinear;
 
     @FXML
     public void loadData() {
@@ -78,7 +90,7 @@ public class SeasonalityController extends MainMainController implements Initial
 
         buildGist(dataSet);
 
-        List<Double> selectionSeasonalityWithTrendLinear = new ArrayList<>(dataSet.size());
+        selectionSeasonalityWithTrendLinear = new ArrayList<>(dataSet.size());
 
         Integer period = Integer.valueOf(periodTF.getText());
         for (int i = 0; i < dataSet.size(); i++) {
@@ -86,7 +98,25 @@ public class SeasonalityController extends MainMainController implements Initial
             selectionSeasonalityWithTrendLinear.add(tmp_data);
         }
 
-        addNewLine(selectionSeasonalityWithTrendLinear, "бла");
+        Integer r = Integer.valueOf(kTF.getText());
+
+        List<Double> furFur = new ArrayList<>(dataSet.size());
+        for (int i = 0; i < dataSet.size(); i++) {
+            double sum = 0;
+            for (int j = 0; j < r; j++) {
+                sum += seasonalityLinear.a.get(j + 1) * Math.cos((i + 1) * ((2.0 * Math.PI * (j + 1)) / period))
+                        + seasonalityLinear.b.get(j) * Math.sin((i + 1) * ((2.0 * Math.PI * (j + 1)) / period));
+            }
+
+            double point = linear.calcU(i) + (seasonalityLinear.a.get(0) + sum);
+            furFur.add(point);
+        }
+
+
+
+
+        addNewLine(selectionSeasonalityWithTrendLinear, "индекс сезонності");
+        addNewLine(furFur, "Фурье");
         LinkedList<Double> forecastWithLast = new LinkedList<>();
         forecastWithLast.add(selectionSeasonalityWithTrendLinear.get(selectionSeasonalityWithTrendLinear.size() -1 ) );
         forecastWithLast.addAll(seasonalityLinear.forecast);
@@ -113,6 +143,19 @@ public class SeasonalityController extends MainMainController implements Initial
         items.clear();
 
         items.addAll(selectionBalancesLinear);
+
+        balanceChart.getData().clear();
+        balanceChart.layout();
+
+        XYChart.Series<Number, Number> series = new XYChart.Series<>();
+
+        for (int i = 0; i < dataSet.size(); i++) {
+            series.getData().add( new XYChart.Data<>(i, selectionBalancesLinear.get(i)) );
+        }
+
+
+        balanceChart.getData().add(series);
+        balanceChart.resetZoom();
     }
 
 
@@ -170,4 +213,35 @@ public class SeasonalityController extends MainMainController implements Initial
         }
     }
 
+
+    @Override
+    protected void buildTable(List<Double> dataSet) {
+        super.buildTable(dataSet);
+
+        List<ExistDto> characteristics = new ArrayList<>();
+
+
+        Linear linear = new Linear(selectionSeasonalityWithTrendLinear);
+
+        double fTest = linear.getFTest();
+        double fisherQuantil = QuantilCalculator.FisherQuantil(1, dataSet.size() - 2);
+        ExistDto fTestDto = new ExistDto("F тест",
+                (float) fTest,
+                (float) fisherQuantil,
+                fTest > fisherQuantil ? "значимый" : "не значимый");
+
+
+        float r2percent = LinearXmlController.round2(linear.getR2() * 100, 2);
+        ExistDto r2Dto = new ExistDto(
+                "R^2",
+                r2percent+"%",
+                100.0F,
+                r2percent > 50 ? "адекватный" : "не адекватный");
+
+        characteristics.add(new ExistDto("-----", 0f, 0f, "----"));
+        characteristics.add(fTestDto);
+        characteristics.add(r2Dto);
+
+        charTable.getItems().addAll(characteristics);
+    }
 }

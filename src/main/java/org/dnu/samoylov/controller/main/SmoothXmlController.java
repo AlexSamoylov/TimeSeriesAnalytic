@@ -1,6 +1,8 @@
 package org.dnu.samoylov.controller.main;
 
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -26,6 +28,10 @@ public class SmoothXmlController extends MainController implements Initializable
     public TableColumn smDeviation2Column;
 
 
+    List<Double> dataSet;
+    List<Double> expSmoothingDataSet;
+    List<Double> medSmoothingDataSet;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         super.initialize(location, resources);
@@ -40,19 +46,19 @@ public class SmoothXmlController extends MainController implements Initializable
 
     @Override
     protected void twerkWithDataSet(List<Double> dataSet) {
+        this.dataSet = dataSet;
         buildGist(dataSet);
         buildTable(dataSet);
         buildCorrelogramChart(dataSet);
         buildSmoothingTable(dataSet);
     }
 
-
     protected void buildSmoothingTable( List<Double> dataSet) {
         ExponentialSmoothing expBuilder = new ExponentialSmoothing(dataSet, QuantilCalculator.DEF_ALPHA);
-        List<Double> expSmoothingDataSet = expBuilder.getSmoothing();
+        expSmoothingDataSet = expBuilder.getSmoothing();
 
         MedianSmoothing medianBuilder = new MedianSmoothing(dataSet);
-        List<Double> medSmoothingDataSet = medianBuilder.getSmoothing();
+        medSmoothingDataSet = medianBuilder.getSmoothing();
 
         int n = dataSet.size();
 
@@ -89,6 +95,21 @@ public class SmoothXmlController extends MainController implements Initializable
 
         addNewLine(expSmoothingDataSet, "експоненційне вирівнювання");
         addNewLine(medSmoothingDataSet, "медіанне вирівнювання");
+    }
+
+    @FXML
+    public void goLab2Orginal(ActionEvent actionEvent) {
+        LinearXmlController.showLinear(actionEvent, dataSet);
+    }
+
+    @FXML
+    public void goLab2Median(ActionEvent actionEvent) {
+        LinearXmlController.showLinear(actionEvent, medSmoothingDataSet);
+    }
+
+    @FXML
+    public void goLab2Exp(ActionEvent actionEvent) {
+        LinearXmlController.showLinear(actionEvent, expSmoothingDataSet);
     }
 
     public static class SmoothingDto {

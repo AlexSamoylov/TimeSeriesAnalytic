@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <?import org.dnu.samoylov.util.ZoomedLineChart?>
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="709.0" prefWidth="1009.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.dnu.samoylov.controller.main.SmoothXmlController">
    <children>
-       <Button mnemonicParsing="false" onAction="#loadData" prefHeight="60.0" prefWidth="60.0" text="Завантажити" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+       <Button mnemonicParsing="false" onAction="#loadData" prefHeight="60.0" prefWidth="97.0" text="Завантажити" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
 
        <ZoomedLineChart fx:id="empFunctionChart" layoutX="70.0" layoutY="82.0" prefHeight="308.0" prefWidth="399.0"/>
 
@@ -38,5 +41,10 @@
                <NumberAxis side="LEFT" />
            </yAxis>
        </BarChart>
+      <Label layoutX="299.0" layoutY="32.0" text="Alpha" />
+      <TextField layoutX="338.0" layoutY="28.0" prefHeight="25.0" prefWidth="60.0" text="0.95" />
+      <Button layoutX="531.0" layoutY="10.0" mnemonicParsing="false" onAction="#goLab2Orginal" prefHeight="60.0" prefWidth="97.0" text="Lab2 Original" />
+      <Button layoutX="641.0" layoutY="10.0" mnemonicParsing="false" onAction="#goLab2Median" prefHeight="60.0" prefWidth="97.0" text="Lab2 Median" />
+      <Button layoutX="751.0" layoutY="10.0" mnemonicParsing="false" onAction="#goLab2Exp" prefHeight="60.0" prefWidth="97.0" text="Lab2 Exp" />
    </children>
 </AnchorPane>

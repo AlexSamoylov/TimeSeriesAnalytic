@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
+
 <?import org.dnu.samoylov.util.ZoomedLineChart?>
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="709.0" prefWidth="1009.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.dnu.samoylov.controller.main.SeasonalityController">
    <children>
        <Button mnemonicParsing="false" onAction="#loadData" prefHeight="60.0" prefWidth="123.0" text="GO!" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
       <ZoomedLineChart fx:id="empFunctionChart" layoutX="430.0" layoutY="70.0" prefHeight="308.0" prefWidth="399.0"/>
 
 
-       <TableView fx:id="charTable" layoutX="250.0" layoutY="409.0" prefHeight="256.0" prefWidth="738.0">
+       <TableView fx:id="charTable" layoutX="500.0" layoutY="409.0" prefHeight="256.0" prefWidth="509.0">
            <columns>
                <TableColumn fx:id="charNameColumn" prefWidth="80.0" text="Критерий" />
-               <TableColumn fx:id="charStatisticColumn" prefWidth="150.0" text="Статистика" />
-               <TableColumn fx:id="charQuantilColumn" prefWidth="150.0" text="Квантиль" />
-               <TableColumn fx:id="charResultColumn" prefWidth="200.0" text="Висновок" />
+               <TableColumn fx:id="charStatisticColumn" prefWidth="115.0" text="Статистика" />
+               <TableColumn fx:id="charQuantilColumn" prefWidth="136.0" text="Квантиль" />
+               <TableColumn fx:id="charResultColumn" prefWidth="174.0" text="Висновок" />
            </columns>
        </TableView>
       <ListView fx:id="compareView" layoutX="843.0" layoutY="8.0" prefHeight="379.0" prefWidth="166.0" />
@@ -27,6 +32,7 @@
       <ListView fx:id="seasonWaveLv" layoutX="14.0" layoutY="85.0" prefHeight="136.0" prefWidth="175.0" />
       <ListView fx:id="forecastLv" layoutX="201.0" layoutY="82.0" prefHeight="136.0" prefWidth="227.0" />
       <ListView fx:id="fourerLv" layoutX="15.0" layoutY="227.0" prefHeight="136.0" prefWidth="417.0" />
-      <ListView fx:id="balanceLv" layoutX="15.0" layoutY="409.0" prefHeight="256.0" prefWidth="198.0" />
+      <ListView fx:id="balanceLv" layoutX="10.0" layoutY="409.0" prefHeight="256.0" prefWidth="160.0" />
+      <ZoomedLineChart fx:id="balanceChart" layoutX="170.0" layoutY="409.0" prefHeight="256.0" prefWidth="329.0"/>
    </children>
 </AnchorPane>

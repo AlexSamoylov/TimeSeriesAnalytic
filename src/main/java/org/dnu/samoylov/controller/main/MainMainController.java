@@ -109,7 +109,7 @@ public class MainMainController extends AbstractFxmlController implements Initia
 
     public static class ExistDto {
         private String name;
-        private Float statistic;
+        private String statistic;
         private Float quantil;
         private String result;
 
@@ -117,6 +117,10 @@ public class MainMainController extends AbstractFxmlController implements Initia
         }
 
         public ExistDto(String name, Float statistic, Float quantil, String result) {
+            this(name, statistic.toString(), quantil, result);
+        }
+
+        public ExistDto(String name, String statistic, float quantil, String result) {
             this.name = name;
             this.statistic = statistic;
             this.quantil = quantil;
@@ -131,11 +135,11 @@ public class MainMainController extends AbstractFxmlController implements Initia
             this.name = name;
         }
 
-        public Float getStatistic() {
+        public String getStatistic() {
             return statistic;
         }
 
-        public void setStatistic(Float statistic) {
+        public void setStatistic(String statistic) {
             this.statistic = statistic;
         }
 

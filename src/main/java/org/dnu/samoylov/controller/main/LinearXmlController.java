@@ -4,11 +4,17 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ToggleButton;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.dnu.samoylov.controller.sub.linear.Linear;
 import org.dnu.samoylov.controller.sub.linear.NonLinear;
 import org.dnu.samoylov.service.estimate.QuantilCalculator;
+import org.dnu.samoylov.util.SpringFXMLLoader;
 import org.springframework.stereotype.Controller;
 
 import java.net.URL;
@@ -24,6 +30,26 @@ public class LinearXmlController extends MainController implements Initializable
     List<Double> dataSet;
     Linear linear;
 
+    public static void showLinear(ActionEvent event, List<Double> dataSet) {
+
+        final Group root = new Group();
+        final Stage stage = new Stage();
+
+        final LinearXmlController controller = (LinearXmlController) SpringFXMLLoader.load("/fxml/linear.fxml");
+        root.getChildren().add(controller.getView());
+        final Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(
+                ((Node) event.getSource()).getScene().getWindow());
+
+        stage.show();
+
+        if (dataSet != null) {
+            controller.twerkWithDataSet(dataSet);
+        }
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -49,7 +75,7 @@ public class LinearXmlController extends MainController implements Initializable
 
 
         buildGist(dataSet);
-        addNewLine(trendLinear, "без тренду");
+        addNewLine(trendLinear, "тренд");
         buildTable(selectionWithoutTrendLinear);
         showCoef();
 
@@ -57,8 +83,8 @@ public class LinearXmlController extends MainController implements Initializable
     }
 
 
-    public void showSeasonality() {
-        SeasonalityController.showSeasonality(linear, dataSet, getWithoutTrendDataSet(dataSet));
+    public void showSeasonality(ActionEvent actionEvent) {
+        SeasonalityController.showSeasonality(actionEvent, linear, dataSet, getWithoutTrendDataSet(dataSet));
     }
 
 
@@ -107,7 +133,7 @@ public class LinearXmlController extends MainController implements Initializable
         float r2percent = round2(linear.getR2() * 100, 2);
         ExistDto r2Dto = new ExistDto(
                 "R^2",
-                r2percent,
+                r2percent+"%",
                 100.0F,
                 r2percent > 50 ? "адекватный" : "не адекватный");
 
