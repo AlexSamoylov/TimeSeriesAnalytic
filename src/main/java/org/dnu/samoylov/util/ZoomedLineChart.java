@@ -54,13 +54,6 @@ public class ZoomedLineChart extends LineChart<Number, Number> {
         this.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                final NumberAxis yAxis = (NumberAxis) ZoomedLineChart.this.getYAxis();
-                Point2D yAxisInScene = yAxis.localToScene(0, 0);
-
-                final NumberAxis xAxis = (NumberAxis) ZoomedLineChart.this.getXAxis();
-                Point2D xAxisInScene = xAxis.localToScene(0, 0);
-
-
                 mouseAnchor.set(new Point2D(event.getX() - ZoomedLineChart.this.getLayoutX(), event.getY() - ZoomedLineChart.this.getLayoutY()));
                 mouseAnchor.set(new Point2D(event.getX(), event.getY()));
                 rect.setWidth(0);
@@ -108,12 +101,23 @@ public class ZoomedLineChart extends LineChart<Number, Number> {
                 .max(Comparator.comparing(x -> x.getYValue().doubleValue()))
                 .get().getYValue().doubleValue();
 
+        double minX = this.getData()
+                .stream()
+                .flatMap(x -> x.getData().stream())
+                .min(Comparator.comparing(x -> x.getXValue().doubleValue()))
+                .get().getXValue().doubleValue();
+        double minY = this.getData()
+                .stream()
+                .flatMap(x -> x.getData().stream())
+                .min(Comparator.comparing(x -> x.getYValue().doubleValue()))
+                .get().getYValue().doubleValue();
+
         final NumberAxis xAxis = (NumberAxis)this.getXAxis();
-        xAxis.setLowerBound(0);
+        xAxis.setLowerBound(minX);
         xAxis.setUpperBound(maxX);
 
         final NumberAxis yAxis = (NumberAxis)this.getYAxis();
-        yAxis.setLowerBound(0);
+        yAxis.setLowerBound(minY);
         yAxis.setUpperBound(maxY);
 
         zoomRect.setWidth(0);
