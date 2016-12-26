@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -14,6 +15,7 @@ import org.dnu.samoylov.controller.sub.CorrelogramMethod;
 import org.dnu.samoylov.controller.sub.RecordMethod;
 import org.dnu.samoylov.controller.sub.Result;
 import org.dnu.samoylov.controller.sub.SignMethod;
+import org.dnu.samoylov.util.ZoomedLineChart;
 import org.dnu.samoylov.util.onetimerun.OneTimeRunMethod;
 import org.dnu.samoylov.util.onetimerun.RunLambda;
 import org.springframework.stereotype.Controller;
@@ -44,7 +46,7 @@ public class MainMainController extends AbstractFxmlController implements Initia
 
 
     @FXML
-    private LineChart<Number, Number> empFunctionChart;
+    private ZoomedLineChart empFunctionChart;
 
 
 
@@ -80,7 +82,9 @@ public class MainMainController extends AbstractFxmlController implements Initia
         }
 
         series.setName(name);
+
         empFunctionChart.getData().add(series);
+        empFunctionChart.resetZoom();
     }
 
     protected void buildTable( List<Double> dataSet) {

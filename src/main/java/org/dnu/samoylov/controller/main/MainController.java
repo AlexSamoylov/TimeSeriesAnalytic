@@ -23,11 +23,6 @@ import java.util.stream.Stream;
 @Controller
 public class MainController extends MainMainController implements Initializable {
 
-
-
-    @FXML
-    private LineChart<Number, Number> empFunctionChart;
-
     @FXML private BarChart<String, Number> classesChart;
 
 

@@ -7,17 +7,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import org.dnu.samoylov.util.ZoomedLineChart?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="709.0" prefWidth="1009.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.dnu.samoylov.controller.main.LinearXmlController">
    <children>
        <Button mnemonicParsing="false" onAction="#loadData" prefHeight="60.0" prefWidth="100.0" text="Завантажити" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
-      <LineChart fx:id="empFunctionChart" layoutX="70.0" layoutY="82.0" prefHeight="308.0" prefWidth="399.0">
-        <xAxis>
-          <NumberAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </LineChart>
+      <ZoomedLineChart fx:id="empFunctionChart" layoutX="70.0" layoutY="82.0" prefHeight="308.0" prefWidth="399.0"/>
 
        <TableView fx:id="charTable" layoutX="70.0" layoutY="405.0" prefHeight="256.0" prefWidth="399.0">
            <columns>

@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import org.dnu.samoylov.util.ZoomedLineChart?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="709.0" prefWidth="1009.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.dnu.samoylov.controller.main.SeasonalityController">
    <children>
        <Button mnemonicParsing="false" onAction="#loadData" prefHeight="60.0" prefWidth="123.0" text="GO!" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
-      <LineChart fx:id="empFunctionChart" layoutX="430.0" layoutY="70.0" prefHeight="308.0" prefWidth="399.0">
-        <xAxis>
-          <NumberAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </LineChart>
+      <ZoomedLineChart fx:id="empFunctionChart" layoutX="430.0" layoutY="70.0" prefHeight="308.0" prefWidth="399.0"/>
+
 
        <TableView fx:id="charTable" layoutX="250.0" layoutY="409.0" prefHeight="256.0" prefWidth="738.0">
            <columns>
