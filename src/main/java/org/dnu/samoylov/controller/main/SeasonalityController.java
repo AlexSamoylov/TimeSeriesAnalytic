@@ -1,6 +1,5 @@
 package org.dnu.samoylov.controller.main;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.dnu.samoylov.controller.sub.linear.Linear;
+import org.dnu.samoylov.controller.sub.linear.NonLinear;
 import org.dnu.samoylov.controller.sub.seasonality.Seasonality;
 import org.dnu.samoylov.service.estimate.QuantilCalculator;
 import org.dnu.samoylov.util.SpringFXMLLoader;
@@ -220,10 +220,14 @@ public class SeasonalityController extends MainMainController implements Initial
 
         List<ExistDto> characteristics = new ArrayList<>();
 
+        final Linear newLinear;
+        if (linear instanceof NonLinear) {
+            newLinear = new NonLinear(selectionSeasonalityWithTrendLinear);
+        } else {
+            newLinear = new Linear(selectionSeasonalityWithTrendLinear);
+        }
 
-        Linear linear = new Linear(selectionSeasonalityWithTrendLinear);
-
-        double fTest = linear.getFTest();
+        double fTest = newLinear.getFTest();
         double fisherQuantil = QuantilCalculator.FisherQuantil(1, dataSet.size() - 2);
         ExistDto fTestDto = new ExistDto("F тест",
                 (float) fTest,
@@ -231,7 +235,7 @@ public class SeasonalityController extends MainMainController implements Initial
                 fTest > fisherQuantil ? "значимый" : "не значимый");
 
 
-        float r2percent = LinearXmlController.round2(linear.getR2() * 100, 2);
+        float r2percent = LinearXmlController.round2(newLinear.getR2() * 100, 2);
         ExistDto r2Dto = new ExistDto(
                 "R^2",
                 r2percent+"%",

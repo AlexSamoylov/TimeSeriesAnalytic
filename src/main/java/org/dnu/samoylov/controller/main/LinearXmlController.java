@@ -63,6 +63,10 @@ public class LinearXmlController extends MainController implements Initializable
         } else {
             typeChangingBtn.setText("u = a0 + a1*t");
         }
+
+        if (dataSet != null) {
+            twerkWithDataSet(dataSet);
+        }
     }
 
     @Override

@@ -6,10 +6,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.dnu.samoylov.controller.sub.smoothing.ExponentialSmoothing;
 import org.dnu.samoylov.controller.sub.smoothing.MedianSmoothing;
-import org.dnu.samoylov.service.estimate.QuantilCalculator;
 import org.springframework.stereotype.Controller;
 
 import java.net.URL;
@@ -26,6 +26,7 @@ public class SmoothXmlController extends MainController implements Initializable
     public TableColumn smDeviation1Column;
     public TableColumn smSmoothValue2Column;
     public TableColumn smDeviation2Column;
+    public TextField alpha;
 
 
     List<Double> dataSet;
@@ -54,7 +55,7 @@ public class SmoothXmlController extends MainController implements Initializable
     }
 
     protected void buildSmoothingTable( List<Double> dataSet) {
-        ExponentialSmoothing expBuilder = new ExponentialSmoothing(dataSet, QuantilCalculator.DEF_ALPHA);
+        final ExponentialSmoothing expBuilder = new ExponentialSmoothing(dataSet, Double.valueOf(alpha.getText()));
         expSmoothingDataSet = expBuilder.getSmoothing();
 
         MedianSmoothing medianBuilder = new MedianSmoothing(dataSet);
@@ -110,6 +111,11 @@ public class SmoothXmlController extends MainController implements Initializable
     @FXML
     public void goLab2Exp(ActionEvent actionEvent) {
         LinearXmlController.showLinear(actionEvent, expSmoothingDataSet);
+    }
+
+    @FXML
+    public void changeAlpha(ActionEvent actionEvent) {
+        twerkWithDataSet(dataSet);
     }
 
     public static class SmoothingDto {
