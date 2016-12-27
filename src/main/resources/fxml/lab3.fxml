@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.dnu.samoylov.util.ZoomedLineChart?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="709.0"
+            prefWidth="1009.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.dnu.samoylov.controller.main.Lab3Controller">
+    <children>
+        <Button layoutX="712.0" layoutY="14.0" mnemonicParsing="false" onAction="#button5_Click" prefHeight="60.0"
+                prefWidth="97.0" text="GO!" AnchorPane.leftAnchor="812.0" AnchorPane.topAnchor="14.0"/>
+
+
+        <ZoomedLineChart fx:id="empFunctionChart" layoutX="27.0" layoutY="82.0" prefHeight="390.0" prefWidth="993.0"
+                   AnchorPane.bottomAnchor="230.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0"/>
+
+        <TableView fx:id="charSmoothingTable" layoutX="14.0" layoutY="477.0" prefHeight="218.0" prefWidth="970.0"
+                   AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0">
+            <columns>
+                <TableColumn fx:id="smOrigValueColumn" prefWidth="78.0" text="1"/>
+                <TableColumn fx:id="smSmoothValue1Column" prefWidth="73.0" text="2"/>
+                <TableColumn fx:id="smDeviation1Column" prefWidth="137.0" text="3"/>
+                <TableColumn fx:id="smSmoothValue2Column" prefWidth="73.0" text="4"/>
+                <TableColumn fx:id="smDeviation2Column" prefWidth="137.0" text="5"/>
+                <TableColumn fx:id="col6" prefWidth="137.0" text="6"/>
+            </columns>
+        </TableView>
+        <TextField fx:id="b1V" layoutX="248.0" layoutY="49.0" prefHeight="25.0" prefWidth="60.0" text="0.5"/>
+        <Label layoutX="223.0" layoutY="53.0" text="β1="/>
+        <TextField fx:id="b2V" layoutX="347.0" layoutY="49.0" prefHeight="25.0" prefWidth="60.0" text="0.5"/>
+        <Label layoutX="323.0" layoutY="53.0" text="β2="/>
+        <TextField fx:id="b3V" layoutX="445.0" layoutY="49.0" prefHeight="25.0" prefWidth="60.0" text="0.5"/>
+        <Label layoutX="423.0" layoutY="53.0" text="β3="/>
+        <Label layoutX="429.0" layoutY="23.0" text="t="/>
+        <TextField fx:id="tV" layoutX="445.0" layoutY="19.0" prefHeight="25.0" prefWidth="60.0" text="7"/>
+        <Label layoutX="331.0" layoutY="23.0" text="l="/>
+        <TextField fx:id="lV" layoutX="347.0" layoutY="19.0" prefHeight="25.0" prefWidth="60.0" text="12"/>
+        <Label layoutX="225.0" layoutY="23.0" text="k="/>
+        <TextField fx:id="kV" layoutX="248.0" layoutY="19.0" prefHeight="25.0" prefWidth="60.0" text="4"/>
+        <ComboBox fx:id="comboBox" layoutX="524.0" layoutY="14.0" prefHeight="60.0" prefWidth="250.0"/>
+    </children>
+</AnchorPane>

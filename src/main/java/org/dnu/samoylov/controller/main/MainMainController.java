@@ -3,34 +3,20 @@ package org.dnu.samoylov.controller.main;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.FileChooser;
-import org.dnu.samoylov.controller.sub.CorrelogramMethod;
 import org.dnu.samoylov.controller.sub.RecordMethod;
 import org.dnu.samoylov.controller.sub.Result;
 import org.dnu.samoylov.controller.sub.SignMethod;
 import org.dnu.samoylov.util.ZoomedLineChart;
-import org.dnu.samoylov.util.onetimerun.OneTimeRunMethod;
-import org.dnu.samoylov.util.onetimerun.RunLambda;
 import org.springframework.stereotype.Controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Controller
 public class MainMainController extends AbstractFxmlController implements Initializable {
@@ -55,11 +41,13 @@ public class MainMainController extends AbstractFxmlController implements Initia
         empFunctionChart.setCreateSymbols(false);
         empFunctionChart.setAnimated(false);
 
+        if (charNameColumn != null) {
+            charNameColumn.setCellValueFactory(new PropertyValueFactory("name"));
 
-        charNameColumn.setCellValueFactory(new PropertyValueFactory("name"));
-        charStatisticColumn.setCellValueFactory(new PropertyValueFactory("statistic"));
-        charQuantilColumn.setCellValueFactory(new PropertyValueFactory("quantil"));
-        charResultColumn.setCellValueFactory(new PropertyValueFactory("result"));
+            charStatisticColumn.setCellValueFactory(new PropertyValueFactory("statistic"));
+            charQuantilColumn.setCellValueFactory(new PropertyValueFactory("quantil"));
+            charResultColumn.setCellValueFactory(new PropertyValueFactory("result"));
+        }
     }
 
 

@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.embed.swing.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.chart.*?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.layout.*?>
 <?import org.dnu.samoylov.util.ZoomedLineChart?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="709.0" prefWidth="1009.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.dnu.samoylov.controller.main.LinearXmlController">
    <children>
        <Button mnemonicParsing="false" onAction="#loadData" prefHeight="60.0" prefWidth="100.0" text="Завантажити" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
-      <ZoomedLineChart fx:id="empFunctionChart" layoutX="70.0" layoutY="82.0" prefHeight="308.0" prefWidth="399.0"/>
+       <Button layoutX="895.0" layoutY="10.0" mnemonicParsing="false" onAction="#golab3" prefHeight="60.0" prefWidth="100.0" text="GO lab3" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="10.0" />
+      <ZoomedLineChart fx:id="empFunctionChart" layoutX="70.0" layoutY="82.0" prefHeight="308.0" prefWidth="399.0" />
 
        <TableView fx:id="charTable" layoutX="70.0" layoutY="405.0" prefHeight="256.0" prefWidth="399.0">
            <columns>
@@ -32,6 +31,6 @@
        </BarChart>
       <ListView fx:id="coefView" layoutX="126.0" layoutY="10.0" prefHeight="60.0" prefWidth="198.0" />
       <Button layoutX="347.0" layoutY="10.0" mnemonicParsing="false" onAction="#showSeasonality" prefHeight="60.0" prefWidth="100.0" text="Сезонність" />
-      <ToggleButton fx:id="typeChangingBtn" onAction="#typeChange" layoutX="530.0" layoutY="10.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" text="u = a0 + a1*t" />
+      <ToggleButton fx:id="typeChangingBtn" layoutX="530.0" layoutY="10.0" mnemonicParsing="false" onAction="#typeChange" prefHeight="60.0" prefWidth="136.0" text="u = a0 + a1*t" />
    </children>
 </AnchorPane>

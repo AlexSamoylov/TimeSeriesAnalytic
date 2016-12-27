@@ -29,6 +29,7 @@ public class SmoothXmlController extends MainController implements Initializable
     public TextField alpha;
 
 
+
     List<Double> dataSet;
     List<Double> expSmoothingDataSet;
     List<Double> medSmoothingDataSet;

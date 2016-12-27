@@ -155,4 +155,7 @@ public class LinearXmlController extends MainController implements Initializable
         return (float) (int) ((tmp - (int) tmp) >= 0.5f ? tmp + 1 : tmp) / pow;
     }
 
+    public void golab3(ActionEvent actionEvent) {
+        Lab3Controller.showLab3(actionEvent, dataSet);
+    }
 }
